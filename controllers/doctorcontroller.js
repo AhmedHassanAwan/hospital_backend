@@ -63,7 +63,6 @@ export const deleteDoctor = async (req, res) => {
     const doctor = await Doctor.findById(req.params.id);
     if (!doctor) return res.status(404).json({ message: "Doctor not found" });
 
-    // Remove linked user as well
     await User.findByIdAndDelete(doctor.userId);
     await Doctor.findByIdAndDelete(req.params.id);
 
